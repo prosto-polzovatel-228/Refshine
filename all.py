@@ -1,7 +1,7 @@
 import subprocess
 
 # Список файлов с ботами
-bots = ["gr_storm.py", "gr_klin.py"]
+bots = ["gr_storm.py", "gr_klin.py", "other.py"]
 
 processes = []
 
@@ -13,3 +13,4 @@ for bot in bots:
 # Чтобы главный файл не завершился
 for p in processes:
     p.wait()
+
