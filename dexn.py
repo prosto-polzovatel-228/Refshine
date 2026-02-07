@@ -10,11 +10,11 @@ from datetime import datetime, timedelta
 
 # === НАСТРОЙКИ ===
 BOT_TOKEN = '8003243032:AAHFDEYlxuOC1uz11r9Ca9lMEo1hQeDjNaM'
-CHANNEL_ID = -1003878224766
-OWNER_IDS = [5127944821]
+CHANNEL_ID = -1001527165475
+OWNER_IDS = [5127944821, 7099815696]
 OWNER_USERNAME = '@rekfest'
 ADMIN_FILE = 'admins_stream.json'
-CHECK_TIME = "17:15"
+CHECK_TIME = "23:59"
 
 # === ЛОГ-БОТ НАСТРОЙКИ ===
 LOG_BOT_TOKEN = '7973441371:AAELiQCvqAdB8jFqmYxQT0ib7oBWHxpU3oo'  # ⚠️ Замените на токен вашего лог-бота
@@ -616,4 +616,5 @@ if __name__ == '__main__':
 
     threading.Thread(target=scheduler, daemon=True).start()
     log(f"Бот запущен. Проверка в {CHECK_TIME} по МСК.")
+
     bot.infinity_polling(timeout=10, long_polling_timeout=5)
