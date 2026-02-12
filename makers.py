@@ -9,7 +9,7 @@ import time
 from datetime import datetime, timedelta
 
 # === НАСТРОЙКИ ===
-BOT_TOKEN = '8535835827:AAHnTDcHqqdalKOOEXP_IVht1VXa5nqPz7Y'
+BOT_TOKEN = '8535835827:AAFhf2vuwhRpvidbCeVsyB8b6bLO3s3MApo'
 CHANNEL_ID = -1003846497278
 OWNER_IDS = [5127944821, 1513619439]
 OWNER_USERNAME = '@elenesing'
