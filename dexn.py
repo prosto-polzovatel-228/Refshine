@@ -11,8 +11,8 @@ from datetime import datetime, timedelta
 # === НАСТРОЙКИ ===
 BOT_TOKEN = '8003243032:AAHFDEYlxuOC1uz11r9Ca9lMEo1hQeDjNaM'
 CHANNEL_ID = -1001527165475
-OWNER_IDS = [5127944821, 7099815696]
-OWNER_USERNAME = '@rekfest'
+OWNER_IDS = [5127944821, 6066649640]
+OWNER_USERNAME = '@Gggrickd'
 ADMIN_FILE = 'admins_stream.json'
 CHECK_TIME = "23:59"
 
@@ -618,3 +618,4 @@ if __name__ == '__main__':
     log(f"Бот запущен. Проверка в {CHECK_TIME} по МСК.")
 
     bot.infinity_polling(timeout=10, long_polling_timeout=5)
+
