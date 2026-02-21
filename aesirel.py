@@ -354,14 +354,15 @@ def menu_handler(call):
         if username not in active_sets:
             bot.answer_callback_query(call.id, "У вас нет открытого набора.", show_alert=True)
             return
-
-        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
+            
+        markup = types.InlineKeyboardMarkup()
+        markup.row(types.InlineKeyboardButton("Как начать?", url="https://t.me/aesirel_obuch"), types.InlineKeyboardButton("Выплаты", url="https://t.me/aesirel_payments"))
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=murkup)
         msg_id = active_sets[username]["msg_id"]
 
         try:
             bot.edit_message_text(
-                "🔒 Набор закрыт, ожидайте следующие задания",
-                chat_id=CHANNEL_ID, message_id=msg_id, parse_mode='HTML')
+                "🔒 Набор закрыт, ожидайте следующие задания", chat_id=CHANNEL_ID, message_id=msg_id, parse_mode='HTML')
         except Exception as e:
             log(f"Ошибка при редактировании сообщения: {e}")
 
@@ -481,7 +482,6 @@ def confirm_handler(call):
     if call.data == "confirm_yes":
         markup = types.InlineKeyboardMarkup()
         markup.row(types.InlineKeyboardButton("Взять задание", url=f"https://t.me/{username}"))
-        markup.row(types.InlineKeyboardButton("Как начать?", url="https://t.me/instructionsream"), types.InlineKeyboardButton("Выплаты", url="https://t.me/bulwjf"))
 
         text_publish = (
             f"<b>• Платформа:</b> {html.escape(data['platform'])}\n"
