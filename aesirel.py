@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 # === НАСТРОЙКИ ===
 BOT_TOKEN = '8571682294:AAHfLqvLSadmm1qaGn94LSZV4sNm11RV2cE'
 CHANNEL_ID = -1003768671164
-OWNER_IDS = [5127944821, 6066649640]
+OWNER_IDS = [5127944821, 7855038952]
 OWNER_USERNAME = '@arzaramanager'
 ADMIN_FILE = 'admins_aesirel.json'
 CHECK_TIME = "23:59"
