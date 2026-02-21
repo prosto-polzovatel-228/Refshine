@@ -354,15 +354,18 @@ def menu_handler(call):
         if username not in active_sets:
             bot.answer_callback_query(call.id, "У вас нет открытого набора.", show_alert=True)
             return
-            
-        markup = types.InlineKeyboardMarkup()
-        markup.row(types.InlineKeyboardButton("Как начать?", url="https://t.me/aesirel_obuch"), types.InlineKeyboardButton("Выплаты", url="https://t.me/aesirel_payments"))
-        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=murkup)
+
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
         msg_id = active_sets[username]["msg_id"]
 
         try:
+            markup = types.InlineKeyboardMarkup()
+            markup.row(types.InlineKeyboardButton("Как начать?", url="https://t.me/aesirel_obuch"))
+            markup.row(types.InlineKeyboardButton("Выплаты", url="https://t.me/aesirel_payments"))
             bot.edit_message_text(
-                "🔒 Набор закрыт, ожидайте следующие задания", chat_id=CHANNEL_ID, message_id=msg_id, parse_mode='HTML')
+                "<b>✅ Данное задание завершено, набор закрыт.</b>\n\n"
+                "<blockquote>🔔 Не упустите возможности получить новое! Рекомендуем включить уведомления.</blockquote>",
+                chat_id=CHANNEL_ID, message_id=msg_id, parse_mode='HTML', reply_markup=markup)
         except Exception as e:
             log(f"Ошибка при редактировании сообщения: {e}")
 
@@ -376,7 +379,7 @@ def menu_handler(call):
 @bot.callback_query_handler(func=lambda call: call.data.startswith("platform_"))
 def platform_handler(call):
     if not is_admin(call.from_user):
-        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=markup)
         bot.send_message(call.message.chat.id,
                          f"🔐Упс, у вас нет доступа к боту!\nМожете приобрести доступ у {OWNER_USERNAME}",
                          parse_mode='HTML')
@@ -484,10 +487,14 @@ def confirm_handler(call):
         markup.row(types.InlineKeyboardButton("Взять задание", url=f"https://t.me/{username}"))
 
         text_publish = (
-            f"<b>• Платформа:</b> {html.escape(data['platform'])}\n"
-            f"<b>• Оплата:</b> {html.escape(data['payment'])}\n"
-            f"<b>• Описание:</b> {html.escape(data['description'])}\n"
-            f"<b>• Выдаст:</b> @{username}"
+            f"<b>📝 НОВОЕ ЗАДАНИЕ</b>\n\n"
+            f"🌐 Платформа: {html.escape(data['platform'])}\n"
+            f"📋 Описание: {html.escape(data['description'])}\n"
+            f"💰 Вознаграждение: {html.escape(data['payment'])}\n"
+            f"🤝 Задание выдаст: @{username}\n\n"
+            f"••• ━───── • • ─────━ •••\n"
+            f"◇ Наши выплаты – @aesirel_payments\n"
+            f"◇ Обучение – @aesirel_obuch\n"
         )
         msg = bot.send_message(CHANNEL_ID, text_publish, parse_mode="HTML", disable_web_page_preview=True,
                                reply_markup=markup)
